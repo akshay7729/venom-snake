@@ -8,8 +8,34 @@ const App = () => {
   const [snake, setSnake] = useState(constant.snake_start);
   const [apple, setApple] = useState(constant.apple_start);
   const [dir, setDir] = useState([0,-1]);
-  const [speed, setSpeed] = useState(null);
+  const [speed, setSpeed] = useState(2000);
   const [gameOver, setGameOver] = useState(false);
+
+  //move snake
+  const moveSnake = (event) => {
+    if(event.keycode >= 37 || event.keyCode <= 40){
+      console.log('key', event.keyCode);
+      setDir(constant.directions[event.keyCode])
+    }
+  }
+
+  // run snake
+  const gameLoop = () => {
+
+    // deep copy snake
+    const snakeCopy = JSON.parse(JSON.stringify(snake));
+    console.log('snakeCopy',snakeCopy)
+    const newSnakeHead = [snakeCopy[0][0] + dir[0], snakeCopy[0][1] + dir[1]];
+
+    //new head
+    snakeCopy.unshift(newSnakeHead);
+
+    //remove tail
+    snakeCopy.pop();
+
+    setSnake(snakeCopy)
+
+  }
 
   useEffect(() => {
     const context = canvasRef.current.getContext("2d");
@@ -29,8 +55,10 @@ const App = () => {
 
   },[snake,apple, gameOver])
 
+  useInterval(() => gameLoop(),speed);
+
   return (
-    <div className="App" role="button" tabIndex="0">
+    <div className="App" role="button" tabIndex="0" onKeyDown={e => moveSnake(e)}>
       <canvas 
         id="canvas"
         className="canvas" 
