@@ -4,7 +4,7 @@ const snake_start = [
 ];
 const apple_start = [8,3];
 const scale = 40;
-const speed = 100;
+const speed = 500;
 const directions = {
     38: [0,-1], //up
     40: [0,1],  //down
