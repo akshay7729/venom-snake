@@ -24,13 +24,27 @@ const App = () => {
   const endGame = () => {
     setSpeed(null);
     setGameOver(true);
-  }
+  };
 
   //move snake
   const moveSnake = event => {
     if (event.keycode >= 37 || event.keyCode <= 40) {
       console.log("key", event.keyCode);
       setDir(constant.directions[event.keyCode]);
+    }
+  };
+
+  // check collision
+  const checkCollision = (piece, snk = snake) => {
+    if (
+      piece[0] * constant.scale >= constant.canvas_size[0] ||
+      piece[1] * constant.scale >= constant.canvas_size[1] ||
+      piece[0] < 0 ||
+      piece[1] < 0
+    ){
+      return true;
+    }else{
+      return false;
     }
   };
 
@@ -43,6 +57,11 @@ const App = () => {
 
     //shift head
     snakeCopy.unshift(newSnakeHead);
+
+    // check collision
+    if(checkCollision(newSnakeHead)){
+      endGame();
+    }
 
     //remove tail
     snakeCopy.pop();
