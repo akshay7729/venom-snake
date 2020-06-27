@@ -34,6 +34,13 @@ const App = () => {
     }
   };
 
+  //create apple
+  const createApple = () => {
+    return apple.map((x, i) => {
+      return Math.floor(Math.random() * (constant.canvas_size[i] / constant.scale));
+    });
+  };
+
   // check collision
   const checkCollision = (piece, snk = snake) => {
     if (
@@ -41,9 +48,22 @@ const App = () => {
       piece[1] * constant.scale >= constant.canvas_size[1] ||
       piece[0] < 0 ||
       piece[1] < 0
-    ){
+    ) {
       return true;
-    }else{
+    } else {
+      return false;
+    }
+  };
+
+  //check apple collision
+  const checkAppleCollision = newSnake => {
+    console.log('new snake', newSnake);
+    if (newSnake[0][0] === apple[0] && newSnake[0][1] === apple[1]) {
+      let newApple = createApple();
+      console.log('newApple', newApple);
+      setApple(newApple);
+      return true;
+    } else {
       return false;
     }
   };
@@ -52,19 +72,20 @@ const App = () => {
   const gameLoop = () => {
     // deep copy snake
     const snakeCopy = JSON.parse(JSON.stringify(snake));
-    console.log("snakeCopy", snakeCopy);
     const newSnakeHead = [snakeCopy[0][0] + dir[0], snakeCopy[0][1] + dir[1]];
 
     //shift head
     snakeCopy.unshift(newSnakeHead);
 
     // check collision
-    if(checkCollision(newSnakeHead)){
+    if (checkCollision(newSnakeHead)) {
       endGame();
     }
-
-    //remove tail
-    snakeCopy.pop();
+    
+    if (!checkAppleCollision(snakeCopy)) {
+      //remove tail
+      snakeCopy.pop();
+    }
 
     //setting the new coordinates for new snake position
     setSnake(snakeCopy);
