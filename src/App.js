@@ -80,6 +80,7 @@ const App = () => {
 
     // check collision
     if (checkCollision(newSnakeHead)) {
+      setScore(snakeCopy.length-1);
       endGame();
     }
     
@@ -127,6 +128,7 @@ const App = () => {
       >
       </canvas>
       <div id="gameOverText">{gameOver && <p className="gameOver">Game Over</p>}</div>
+      <div id="score">{gameOver && <p>Score: {score}</p>}</div>
       <div id="game-control">
         <img src="/images/snake.jpg"></img>
         <a className="btn-slice" onClick={startGame} style={{cursor:"pointer"}}>

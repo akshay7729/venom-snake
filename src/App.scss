@@ -34,6 +34,12 @@ img {
     margin-top: -50%;
     margin-left: 8%;
 }
+#score {
+    position: absolute;
+    margin-top: -37%;
+    margin-left: 8%;
+    font-size: 12px;
+}
 
 @mixin anim($name, $dur, $iterate) {
     animation-name: $name;
