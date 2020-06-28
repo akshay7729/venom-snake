@@ -123,9 +123,16 @@ const App = () => {
         ref={canvasRef}
         width="800"
         height="800"
-      ></canvas>
-      <div>{gameOver && <div>Game Over</div>}</div>
-      <button onClick={startGame}>Start Venom Snake</button>
+      >
+      </canvas>
+      <div id="gameOverText">{gameOver && <p className="gameOver">Game Over</p>}</div>
+      <div id="game-control">
+        <img src="/images/snake.jpg"></img>
+        <a class="btn-slice" onClick={startGame} style={{cursor:"pointer"}}>
+          <div class="top"><span>Start Snake</span></div>
+          <div class="bottom"><span>Start Snake</span></div>
+        </a>
+      </div>
     </div>
   );
 };
