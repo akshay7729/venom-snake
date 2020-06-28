@@ -1,6 +1,6 @@
 const canvas_size = [800,800];
 const snake_start = [
-    [8,7], [8,8]
+[8,7], [8,8]
 ];
 const apple_start = [8,3];
 const scale = 40;

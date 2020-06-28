@@ -17,7 +17,7 @@ const App = () => {
     setSnake(constant.snake_start);
     setApple(constant.apple_start);
     setDir([0, -1]);
-    setSpeed(constant.speed);
+    setSpeed(500);
     setGameOver(false);
   };
 
@@ -43,12 +43,11 @@ const App = () => {
   };
 
   // check collision
-  const checkCollision = (piece, snk = snake) => {
+  const checkCollision = (head) => {
     if (
-      piece[0] * constant.scale >= constant.canvas_size[0] ||
-      piece[1] * constant.scale >= constant.canvas_size[1] ||
-      piece[0] < 0 ||
-      piece[1] < 0
+      head[0] * constant.scale >= constant.canvas_size[0] ||
+      head[1] * constant.scale >= constant.canvas_size[1] ||
+      head[0] < 0 || head[1] < 0
     ) {
       return true;
     } else {
@@ -108,8 +107,10 @@ const App = () => {
     //create apple
     context.fillStyle = "lightgreen";
     context.fillRect(apple[0], apple[1], 1, 1);
+    
   }, [snake, apple, gameOver]);
 
+  // custom hook
   useInterval(() => gameLoop(), speed);
 
   return (
