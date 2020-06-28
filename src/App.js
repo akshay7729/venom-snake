@@ -10,6 +10,7 @@ const App = () => {
   const [dir, setDir] = useState([0, -1]);
   const [speed, setSpeed] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [score, setScore] = useState(0);
 
   // start game
   const startGame = () => {
@@ -128,9 +129,9 @@ const App = () => {
       <div id="gameOverText">{gameOver && <p className="gameOver">Game Over</p>}</div>
       <div id="game-control">
         <img src="/images/snake.jpg"></img>
-        <a class="btn-slice" onClick={startGame} style={{cursor:"pointer"}}>
-          <div class="top"><span>Start Snake</span></div>
-          <div class="bottom"><span>Start Snake</span></div>
+        <a className="btn-slice" onClick={startGame} style={{cursor:"pointer"}}>
+          <div className="top"><span>Start Snake</span></div>
+          <div className="bottom"><span>Start Snake</span></div>
         </a>
       </div>
     </div>
